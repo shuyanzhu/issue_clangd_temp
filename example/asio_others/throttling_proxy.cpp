@@ -12,7 +12,6 @@
 #include <asio/experimental/as_tuple.hpp>
 #include <asio/experimental/awaitable_operators.hpp>
 #include <asio/experimental/channel.hpp>
-#include <experimental/coroutine>
 #include <iostream>
 
 using asio::awaitable;
@@ -66,6 +65,7 @@ awaitable<void> proxy(tcp::socket client, tcp::endpoint target) {
     token_channel client_tokens(ex, number_of_tokens);
     token_channel server_tokens(ex, number_of_tokens);
 
+    (void)transfer;
     co_await server.async_connect(target, use_awaitable);
     co_await(produce_tokens(bytes_per_token, token_interval, client_tokens) &&
              transfer(client, server, client_tokens) &&

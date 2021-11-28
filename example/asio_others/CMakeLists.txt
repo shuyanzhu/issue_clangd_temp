@@ -1,0 +1,2 @@
+add_executable(asio_throttle throttling_proxy.cpp)
+target_link_libraries(asio_throttle pthread)
